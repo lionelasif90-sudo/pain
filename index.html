@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>🔒 Secure BIO DATA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:400,400italic,500|Roboto+Condensed' rel='stylesheet' type='text/css'>
+  <style>
+  	body {
+		width:80%;
+		margin:auto;
+		font-family: 'Roboto', sans-serif;
+		color: #2C3E50;
+		background-color: #ECF0F1;
+		text-align: center;
+	}
+	
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Roboto Slab', serif;
+	}
+	
+	#loginScreen {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 1000;
+	}
+	
+	.loginBox {
+		background: white;
+		padding: 40px;
+		border-radius: 10px;
+		box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+		width: 90%;
+		max-width: 400px;
+	}
+	
+	.loginBox h2 {
+		color: #333;
+		margin-bottom: 30px;
+	}
+	
+	.loginBox input {
+		width: 100%;
+		padding: 15px;
+		margin: 10px 0;
+		border: 2px solid #ddd;
+		border-radius: 5px;
+		font-size: 16px;
+		box-sizing: border-box;
+	}
+	
+	.loginBox button {
+		width: 100%;
+		padding: 15px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		border: none;
+		border-radius: 5px;
+		font-size: 16px;
+		cursor: pointer;
+		margin-top: 20px;
+	}
+	
+	.loginBox button:hover {
+		opacity: 0.9;
+	}
+	
+	.errorMsg {
+		color: red;
+		margin: 10px 0;
+	}
+	
+	.blockMsg {
+		color: #721c24;
+		background-color: #f8d7da;
+		border: 1px solid #f5c6cb;
+		padding: 15px;
+		border-radius: 5px;
+		margin: 20px 0;
+	}
+	
+	#content {
+		display: none;
+	}
+	
+	.arr {
+		color: #E74C3C;
+		margin-right: 5px;
+	}
+	
+	a {
+		color: #2C3E50;
+		text-decoration: none;
+	}
+	
+	a:active, a:hover {
+		color: #E74C3C;
+	}
+  </style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="loginBox">
+    <h2>🔐 লগইন প্রয়োজন</h2>
+    <input type="password" id="passwordInput" placeholder="পাসওয়ার্ড দিন">
+    <button onclick="checkPassword()">লগইন</button>
+    <div id="loginMessage" class="errorMsg"></div>
+    <div id="blockMessage" class="blockMsg" style="display:none;"></div>
+  </div>
+</div>
+
+<div id="content">
+  <h1>🔒 BIO DATA</h1>
+  
+  <h2>
+    <span class="arr">&#187;</span> 
+    <a href="https://t.me/painworld90" target="_blank" title="Telegram">Telegram</a>
+  </h2>
+  <h2>
+    <span class="arr">&#187;</span>
+    <a href="https://mygp.li/NF7NE8TBM0b" target="_blank" title="My GP Reffer">My Gp Reffer</a>
+  </h2>
+  <h2>
+    <span class="arr">&#187;</span> 
+    <a href="https://www.facebook.com/Lionel_Asif90" target="_blank" title="Facebook">Facebook</a>
+  </h2>
+  <h2>
+    <span class="arr">&#187;</span> 
+    <a href="https://www.threads.com/@lionel_asif90" target="_blank" title="Threads">Threads</a>
+  </h2>
+  <h2>
+    <span class="arr">&#187;</span> 
+    <a href="https://www.instagram.com/lionel_asif90?igsh=Znc2end2bGJiczFh" target="_blank" title="Instagram">Instagram</a>
+  </h2>
+  <h2>
+    <span class="arr">&#187;</span> 
+    <a href="https://wa.me/qr/RQFCXS6PWYHWD1" target="_blank" title="Whatsapp">Whatsapp</a>
+  </h2>
+  <h2>
+    <span class="arr">&#187;</span> 
+    <a href="https://www.tiktok.com/@yo_soy_pain404?_r=1&_t=ZS-93wjxm2PyX" target="_blank" title="Tiktok Account">Tiktok Account</a>
+  </h2>
+  
+  <!-- ইউটিউব লিংক কমেন্ট করা আছে, চাইলে খুলে দিন -->
+  <!--
+  <h2>
+    <span class="arr">&#187;</span> 
+    <a href="https://youtube.com/@lionel_asif90?si=pCXWLYq-coiaQq0Y" target="_blank" title="Youtube">Youtube</a>
+  </h2>
+  -->
+    
+  <h4>&copy; <a href="#" target="_blank" title="LIONEL ASIF">LIONEL ASIF</a> 2026</h4>
+</div>
+
+<script>
+// শক্তিশালী পাসওয়ার্ড হ্যাশ (SHA-256)
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// আপনার পাসওয়ার্ড সেট করুন (এখানে 'Asif@404' পাসওয়ার্ড সেট করা আছে)
+const CORRECT_PASSWORD_HASH = "8eccdb62607b187d8d0adc5fe2f010d0cb0327a5d1d46c543d526eb207e4bb27"; // "password" এর হ্যাশ - আপনি আপনার পছন্দমতো পাসওয়ার্ড সেট করতে পারেন
+
+// ফিঙ্গারপ্রিন্ট জেনারেট (ডিভাইস আইডি)
+function getDeviceFingerprint() {
+    let fingerprint = '';
+    
+    // ব্রাউজার এবং স্ক্রিন ইনফো
+    fingerprint += navigator.userAgent;
+    fingerprint += screen.width + 'x' + screen.height;
+    fingerprint += navigator.language;
+    fingerprint += new Date().getTimezoneOffset();
+    
+    // লোকাল স্টোরেজ আইডি
+    let deviceId = localStorage.getItem('deviceId');
+    if (!deviceId) {
+        deviceId = 'device_' + Math.random().toString(36).substring(2) + Date.now();
+        localStorage.setItem('deviceId', deviceId);
+    }
+    
+    return btoa(fingerprint + deviceId);
+}
+
+// স্টেট ম্যানেজমেন্ট
+const deviceId = getDeviceFingerprint();
+const storageKey = 'secure_access_' + deviceId;
+
+// স্টেট লোড বা ইনিশিয়ালাইজ
+let accessState = JSON.parse(localStorage.getItem(storageKey)) || {
+    attempts: 0,
+    isPermanentlyBlocked: false,
+    blockUntil: null,
+    lastAccess: null,
+    failedAttempts: []
+};
+
+// পারমানেন্ট ব্লক চেক
+if (accessState.isPermanentlyBlocked) {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.querySelector('.loginBox').style.display = 'none';
+    document.getElementById('blockMessage').style.display = 'block';
+    document.getElementById('blockMessage').innerHTML = '⛔ এই ডিভাইসটি পারমানেন্টলি ব্লক করা হয়েছে!';
+}
+
+// টেম্পরারি ব্লক চেক
+if (accessState.blockUntil && new Date().getTime() < accessState.blockUntil) {
+    const remainingTime = Math.ceil((accessState.blockUntil - new Date().getTime()) / (60 * 1000));
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.querySelector('.loginBox').style.display = 'none';
+    document.getElementById('blockMessage').style.display = 'block';
+    document.getElementById('blockMessage').innerHTML = `⏰ এই ডিভাইসটি ${remainingTime} মিনিটের জন্য ব্লক করা আছে!`;
+}
+
+// সেশন চেক (১০ মিনিট পর এক্সপায়ার)
+if (accessState.lastAccess) {
+    const timeDiff = (new Date().getTime() - accessState.lastAccess) / (1000 * 60);
+    if (timeDiff < 10) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+    } else {
+        // সেশন এক্সপায়ার হয়েছে
+        accessState.lastAccess = null;
+        localStorage.setItem(storageKey, JSON.stringify(accessState));
+    }
+}
+
+// পাসওয়ার্ড চেক ফাংশন
+async function checkPassword() {
+    const password = document.getElementById('passwordInput').value;
+    const hashedPassword = await sha256(password);
+    
+    // ব্লক চেক
+    if (accessState.isPermanentlyBlocked) {
+        document.getElementById('loginMessage').innerHTML = '⛔ এই ডিভাইসটি পারমানেন্টলি ব্লক করা হয়েছে!';
+        return;
+    }
+    
+    if (accessState.blockUntil && new Date().getTime() < accessState.blockUntil) {
+        document.getElementById('loginMessage').innerHTML = '⏰ অনেক চেষ্টা করেছেন, কিছুক্ষণ পর আবার চেষ্টা করুন!';
+        return;
+    }
+    
+    // পাসওয়ার্ড চেক
+    if (hashedPassword === CORRECT_PASSWORD_HASH) {
+        // সঠিক পাসওয়ার্ড
+        accessState.attempts = 0;
+        accessState.blockUntil = null;
+        accessState.lastAccess = new Date().getTime();
+        accessState.failedAttempts = [];
+        localStorage.setItem(storageKey, JSON.stringify(accessState));
+        
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+    } else {
+        // ভুল পাসওয়ার্ড
+        accessState.attempts++;
+        accessState.failedAttempts.push(new Date().getTime());
+        
+        // ২৪ ঘন্টার মধ্যে পুরনো failed attempts ফিল্টার
+        const oneDayAgo = new Date().getTime() - (24 * 60 * 60 * 1000);
+        accessState.failedAttempts = accessState.failedAttempts.filter(time => time > oneDayAgo);
+        
+        // ব্লকিং লজিক
+        if (accessState.failedAttempts.length >= 3) {
+            // ৩ বার ভুল = পারমানেন্ট ব্লক
+            accessState.isPermanentlyBlocked = true;
+            localStorage.setItem(storageKey, JSON.stringify(accessState));
+            document.getElementById('loginMessage').innerHTML = '⛔ খুব বেশিবার ভুল করেছেন! এই ডিভাইসটি পারমানেন্টলি ব্লক করা হয়েছে!';
+            setTimeout(() => location.reload(), 2000);
+        } else if (accessState.attempts >= 2) {
+            // ২ বার ভুল = ২৪ ঘন্টা ব্লক
+            accessState.blockUntil = new Date().getTime() + (24 * 60 * 60 * 1000);
+            localStorage.setItem(storageKey, JSON.stringify(accessState));
+            document.getElementById('loginMessage').innerHTML = '⛔ ২ বার ভুল পাসওয়ার্ড! ২৪ ঘন্টার জন্য ব্লক করা হয়েছে!';
+            setTimeout(() => location.reload(), 2000);
+        } else {
+            document.getElementById('loginMessage').innerHTML = `❌ ভুল পাসওয়ার্ড! ${2 - accessState.attempts} বার চেষ্টা বাকি আছে।`;
+        }
+    }
+}
+</script>
+
+</body>
+</html>
